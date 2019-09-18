@@ -1,0 +1,30 @@
+// font-weight helper:
+
+// 100 Extra Light or Ultra Light;
+// 200 Light or Thin; 300 Book or Demi;
+// 400 Regular or Normal;
+// 500 Medium;
+// 600 Semibold or Demibold;
+// 700 Bold;
+// 800 Black or Extra Bold or Heavy;
+// 900 Extra Black or Fat or Ultra Black
+
+@include font('Roboto', normal, 400, '../fonts/roboto-regular-webfont.woff2')
+@include font('Roboto', italic, 400, '../fonts/roboto-italic-webfont.woff2')
+@include font('Roboto', normal, 700, '../fonts/roboto-bold-webfont.woff2')
+@include font('Roboto', italic, 700, '../fonts/roboto-bolditalic-webfont.woff2')
+@include font('Font Awesome 5 Brands', normal, normal, '../fonts/fa-brands-400.woff2')
+@include font('Font Awesome 5 Free', normal, 400, '../fonts/fa-regular-400.woff2')
+@include font('Font Awesome 5 Free', normal, 900, '../fonts/fa-solid-900.woff2')
+
+.fab
+	font-family: 'Font Awesome 5 Brands'
+.far
+	font-family: 'Font Awesome 5 Free'
+	font-weight: 400
+.fa
+	@extend .far
+	font-weight: 900
+	margin: auto
+.fas
+	@extend .fa

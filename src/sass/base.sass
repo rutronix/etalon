@@ -1,0 +1,222 @@
+@import "../../node_modules/bootstrap/scss/mixins/_breakpoints.scss" // Bootstrap Breakpoints mixin
+// @import "../../node_modules/bootstrap/scss/bootstrap-grid.scss" // Bootstrap Grid
+// @import "../../node_modules/bootstrap/scss/bootstrap-reboot.scss" // Bootstrap Reboot collection
+// @import "../../node_modules/bootstrap/scss/utilities/_sizing.scss" // Optional Bootstrap Utilites
+// @import "../../node_modules/normalize.css/normalize.css" // CSS library plug-in example (npm i --save-dev normalize.css)
+
+// // Breakpoints mixin settings (node_modules/bootstrap/scss/mixins/_breakpoints.scss)
+// // Example: +media-breakpoint-down(xs) - ≥576px / +media-breakpoint-up(sm) - // ≤576px
+// // Default variables: node_modules/bootstrap/scss/_variables.scss
+
+// Bootstrap compatible gutter variable => $gutter
+
+// Lazy Load Placeholder built by HTML generator (https://webdesign-master.ru/services/lazy/)
+//background-image: url(data:image/gifbase64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
+
+@import vars
+@import mixins
+@import fonts
+@import media
+@import reset
+@import controls
+@import jcarousel/jcarousel
+@import imagelightbox/imagelightbox
+
+//@for $h from 1 to 5
+//@each $align in left, center, right
+
+*
+	box-sizing: border-box
+
+p
+	margin: 0 0 $base-line-height 0
+	letter-spacing: 0px
+	
+a
+	text-decoration: none
+	//font-weight: bold
+	color: $link-color
+	&:hover
+	 	color: $link-color-hover
+	 	
+li
+	list-style-type: none /* Убираем глобально маркеры */
+
+%img
+	width: 100%
+	height: auto
+	
+.header-background
+	background-size: cover
+	background-repeat: no-repeat
+	background-position: 50% 50%
+	//background-attachment: fixed
+	
+.grid
+	display: grid
+	grid-gap: $gutter-20
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+	//grid-template-columns: 1fr 1fr
+	//grid-template-areas: "left right"
+	margin: 0
+	
+	> div:first-child
+		grid-area: left
+	> div:last-child
+		grid-area: right
+
+	+media-breakpoint-down(xs)
+		//display: block
+		grid-gap: $gutter-20/2
+
+.portfolio
+	display: block
+	width: 100%
+	margin-bottom: $gutter-20
+	column-count: 2
+
+	&-image
+		display: inline-block
+		width: 100%
+		margin-top: $gutter-20
+		float: left
+		page-break-inside: avoid
+		break-inside: avoid
+		
+		&-meta
+			position: absolute
+			display: flex
+			top: 0
+			right: 0
+			bottom: 0
+			left: 0
+			margin: 20%
+			align-items: center
+			justify-content: center
+			flex-direction: column
+			color: #FFF 
+			background: transparentize($theme-color, 0.5)
+			.image-title
+				text-transform: uppercase
+			p
+				margin: 0.5em
+
+.gallery,
+.portfolio
+	&-image
+		position: relative
+		height: auto
+		
+		&-container
+			position: relative
+			padding-top: 100%
+			background-color: darken($main-bg, 5%)
+			img
+				position: absolute
+				top: 0
+				left: 0
+				transition: opacity 500ms ease-in
+				opacity: 0
+				@extend %img
+				
+				&.loaded
+					opacity: 1
+
+		&-details
+			//position: absolute
+			left: 0
+			bottom: 0
+			width: 100%
+			padding: $gutter-20/2 0
+			color: $base-text-color 
+			background-color: transparentize(#FFF, 0.1) 
+			div
+				padding: 0 $gutter-20/4
+ 
+	&-caption
+		display: none
+
+	
+#gallery-lightbox-image
+	position: fixed
+	-ms-touch-action: none
+	touch-action: none
+		
+
+.container
+	padding-left: $gutter-30
+	padding-right: $gutter-30
+
+		
+.bounded
+	max-width: $container_max_w
+	//padding: 0 $gutter-20/2
+	@include push--auto
+
+.align-left
+	justify-content: flex-start
+	//align-items: flex-start
+	
+.align-center
+	justify-content: center		
+	//align-items: center
+
+.align-right
+	justify-content: flex-end
+	//align-items: flex-end
+
+.hidden
+	display: none
+	
+.visible
+	opacity: 1
+
+.blur
+	filter: blur(10px) grayscale(0)
+
+.preloader
+	position: fixed
+	left: 0
+	right: 0
+	top: 0
+	bottom: 0
+	background-color: $preloader-bg
+
+	z-index: 10000
+	i
+		position: absolute
+		left: 50%
+		top: 50%
+		transform: translate(-50%, -50%)
+		font-size: 3em
+		color: $preloader-color
+		
+html
+	font-size: $base-font-size
+	-webkit-font-smoothing: antialiased
+
+body
+	@include font-settings(Roboto, $base-text-color, 1rem, normal, 300, $base-line-height)
+	position: relative
+	display: flex
+	flex-direction: column
+	min-height: 100vh
+	min-width: 320px
+	margin: 0
+	background-color: $body-bg
+	overflow-x: hidden
+
+@import header
+@import main
+@import footer
+
+#site-search-modal
+	position: fixed
+	left: 0
+	right: 0
+	top: 0
+	bottom: 0
+	background: rgba(white, 0.95)
+	justify-content: center
+	align-items: center
+	z-index: 9999

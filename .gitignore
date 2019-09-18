@@ -1,0 +1,9 @@
+/node_modules/
+/.git/
+/**/Thumbs.db
+/**/*.DS_Store
+/src/wordpress/
+!/src/wordpress/search-replace-db
+/src/wp-content/uploads/
+/start-web.sublime-workspace
+/src/wp-content/plugins/

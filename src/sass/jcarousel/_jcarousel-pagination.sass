@@ -1,0 +1,31 @@
+/*  jCarousel Pagination Styles */
+
+.jcarousel-wrapper
+	.jcarousel-pagination
+		position: absolute
+		width: 100%
+		bottom: $gutter-20 / 2
+		background-color: transparent
+		text-align: center
+		a
+			display: inline-block
+			width: $nav-control-w / 1.5
+			height: $nav-control-h / 1.5
+			font-size: 0.8em
+			color: #FFF
+			line-height: $nav-control-h / 1.5
+			text-align: center
+			background-color: transparentize($nav-color, 0.8)
+			border-radius: $nav-control-w 
+			//@include border-radius(50%)
+			margin-left: $gutter-20 / 4
+			&:first-child
+				margin-left: 0
+
+			&:hover
+				background-color: transparentize($nav-color, 0.2)
+				
+			&.active
+				background-color: #FFF
+				//opacity: .9
+				color: #69c

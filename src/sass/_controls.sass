@@ -1,0 +1,142 @@
+//Control selectors
+
+::placeholder
+	color: #666
+
+::selection //когд выделяем текст на странице
+	background-color: $accent
+	color: #fff
+
+input, textarea
+	width: 100%
+	border-radius: 3px 
+	border: 1px solid $base-border-color 
+	outline: none
+	&:focus:required:invalid
+		border-color: red
+	
+input[type="checkbox"]
+	width: auto
+input
+	line-height: 25px
+	
+.search-submit
+	visibility: hidden	
+	
+.button,
+input[type="submit"]
+	$button-h: 40px !global
+	position: relative
+	height: $button-h
+	line-height: $button-h   
+	width: max-content
+	padding: 0 20px
+	@include font-settings(false, $button-text-color, $base-font-size*0.8, uppercase, 500, false)
+	background: transparentize($theme-color, 1)
+	box-shadow: inset 0 0 0 1px $theme-color
+	border-radius: 3px
+	transition: all 500ms ease 
+	cursor: pointer
+	&:hover
+		background: transparentize($theme-color, 0.5)
+		color: $button-text-hover
+
+.icon
+	position: relative
+	display: flex
+	width: $icon-size
+	height: $icon-size
+	//padding: 5px
+	margin: 0
+	background-color: transparent
+	opacity: 0.7
+	font-size: 1.2em
+	text-align: center
+	text-transform: none
+	justify-content: center
+	align-items: center
+	overflow: visible
+	cursor: pointer
+	transition: all 150ms linear
+					
+	&:hover
+		opacity: 1
+			
+.burger-icon	
+	.burger-inner
+		@extend %burger-line
+		top: 50%
+		transform: translateY(-100%)
+		transition: all 100ms cubic-bezier(.55,.055,.675,.19)
+
+		&::before
+			content: ""
+			@extend %burger-line
+			top: -10px
+			left: 0
+			transition: top 100ms ease 150ms, opacity 100ms ease
+			
+		&::after
+			content: ""
+			@extend %burger-line
+			bottom: -10px
+			left: 0
+			transition: bottom 100ms ease 150ms, transform 100ms cubic-bezier(.55,.055,.675,.19)
+
+	&.active
+		.burger-inner
+			transition: all 150ms cubic-bezier(.215,.61,.355,1)
+			transform: rotate(45deg)
+			
+			&::before
+				top: 0
+				opacity: 0
+				transition: top 100ms ease,opacity 100ms ease 150ms
+				
+			&::after
+				bottom: 0
+				transition: bottom 100ms ease,transform 100ms cubic-bezier(.215,.61,.355,1) 150ms
+				transform: rotate(-90deg)
+
+		
+%burger-line
+	position: absolute
+	width: $icon-size
+	height: 3px
+	border-radius: 3px
+	background-color: $base-text-color
+
+/* Font Awesome for a project */
+
+.fa-spinner::before 
+	content: "\f110" 
+
+.fa-angle-left::before
+	content: "\f104" 
+
+.arrow-down::before 
+	content: "\f078" 
+
+.arrow-left::before 
+	content: "\f053" 
+
+.arrow-right::before 
+	content: "\f054" 
+
+.arrow-up::before 
+	content: "\f077"
+
+.fa-long-arrow-alt-down:before
+	content: "\f309"
+
+.fa-long-arrow-alt-left:before
+	content: "\f30a"
+
+.fa-long-arrow-alt-right:before
+	content: "\f30b"
+
+.fa-long-arrow-alt-up:before
+	content: "\f30c"
+	
+.fa-search::before
+	content: "\f002"

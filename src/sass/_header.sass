@@ -1,0 +1,252 @@
+// Header styles
+#site-header
+	width: 100% 
+	height: $header-height
+	background-color: $header-bg
+
+	#top-bar
+		background-color: $top-bar-bg
+		display: flex
+		padding: 
+			left: 0
+			right: 0
+		
+		.widget
+			width: 100%
+			margin:  0 $gutter-20 / 2 auto
+			&:nth-child(n)
+				text-align: center
+			&:first-child
+				text-align: left
+			&:last-child
+				text-align: right
+										
+	#header-container
+		display: flex
+		justify-content: space-between
+
+	
+	&.branding-right
+		flex-direction: row-reverse
+		
+	&.branding-center
+		flex-direction: column
+										
+	#branding
+		display: flex
+		width: $logo-width
+		margin: $gutter-20/2 0 auto
+
+
+		&.align-center
+			margin-bottom: $gutter-20/2
+			a
+				justify-content: center
+
+		&.align-right
+			flex-direction: row-reverse
+
+
+		&.align-vertical
+			flex-direction: column
+
+			a
+				justify-content: center
+				
+			#branding-logo,
+			#branding-title
+				@include push--auto 
+
+			
+		#branding-logo
+			margin: auto 0
+			//padding: 0 $gutter-20/2
+			width: auto 
+
+			img
+				@extend %img
+
+		#branding-title
+			margin: auto 0
+			padding: 0 $gutter-20/2
+			a
+				display: flex
+
+			.site-title
+				margin: 0
+				line-height: 1
+				font-size: 2em
+				text-transform: uppercase
+			.site-description
+				font-size: 1em 
+
+	&.nav-below-logo
+		height: #{strip-units($header-height) + strip-units($nav-height)}px
+		#header-container
+			flex-wrap: wrap-reverse
+
+	&.nav-above-logo
+		height: #{strip-units($header-height) + strip-units($nav-height)}px
+		#header-container
+			flex-wrap: wrap
+
+			
+	&.nav-inline-logo
+		#header-content
+			display: flex
+			flex-wrap: wrap
+			flex: auto
+
+	&.bounded
+		.container
+			padding-left: 0
+			padding-right: 0
+			
+		ul.menu
+			@extend .bounded
+
+	#nav-menu
+		margin-left: 10px
+		//float: left
+		
+	#nav-search
+		@extend #nav-menu
+
+	#header-content
+		&.burger-menu
+			display: inline-block
+			.widget
+				float: left
+						
+// Navigation styles	
+#header-nav
+	display: flex
+	width: 100%
+	height: $nav-height
+	align-items: center
+	//margin-top: auto
+
+	&.burger
+		.nav-search
+			font-size: $icon-font-size 
+		ul.menu
+			//display: none
+			//opacity: 0
+			position: absolute
+			left: 0
+			right: 0
+			top: $header-height
+			height: 0
+			//width: 100%
+			opacity: 0
+			flex-direction: column
+			align-items: center
+			justify-content: space-evenly
+			background-color: transparentize($theme-color, 0.3)
+			transition: height 500ms ease-in, opacity 600ms ease-out
+			overflow: hidden
+			z-index: 9999
+			box-sizing: border-box
+			border-top: 0px solid transparentize($theme-color , 1)
+			backdrop-filter: blur(10px)
+
+			a
+				font-size: 1.5em
+				line-height: 2 
+				color: #FFF
+				letter-spacing: 1px
+				&:hover
+					border-bottom: none
+
+		
+			&.active
+				opacity: 1
+				height: calc-height($header-height, $nav-height, $top-bar-height)
+				border-top: 3px solid transparentize($theme-color , 0)
+				li
+					transition: all 100ms ease-out
+					@include animation(menu-items, 300ms, 0, ease-in, both, In, 0, 0 )
+						transform: translate(0, -80px)
+					@include animation-delays(4, 700ms, -125ms)
+							
+					&.current-menu-item a
+						font-weight: bold
+					
+					&:hover
+						background-color: initial		
+						&::before,
+						&::after
+							content: ''
+							transform: translateY(0.5em) rotate(90deg) scaleY(0.4)
+
+						&::before
+							border-right: 4px solid #FFF 
+							
+						&::after
+							border-left: 4px solid #FFF 					
+
+	ul.menu
+		display: flex
+		position: relative
+		width: 100%
+		margin: 0
+		padding: 0
+		height: $nav-height
+		background-color: $nav-bg 
+		
+		li
+			display: flex
+			transition: none
+			&:hover			
+				background-color: inherit
+
+			a
+				margin: 0 $gutter-20
+				@include font-settings(false, $menu-link-color, 0.8rem, uppercase, 300, $nav-height)
+				letter-spacing: 0px
+	
+				&:hover
+					transition:  100ms all ease-out
+					border-bottom: 4px solid $link-color-hover
+
+		&.responsive
+			height: 500px
+
+	&.float-right
+		//width: auto
+	
+	&.float-left
+		//width: auto
+
+	&.align-left
+		margin-right: auto
+		
+	&.align-center
+		margin-right: auto
+		margin-left: auto
+		ul
+			justify-content: center
+
+	&.align-right
+		margin-left: auto
+		ul
+			justify-content: flex-end
+			
+	&.inline-logo
+		width: auto
+		&.burger
+			ul.menu.active
+				height: calc-height($header-height, $top-bar-height)
+
+		 
+	&.below-logo
+
+	&.above-logo
+			
+	&.under-header
+		&.burger
+			ul.menu
+				margin-top: $nav-height 
+
+// <!-- End Navigation -->
+// <!-- End Header -->

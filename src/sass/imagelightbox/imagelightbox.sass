@@ -1,0 +1,174 @@
+@import ../mixins
+
+//imageLightbox variables
+
+$nav-control-w: 3em
+$nav-control-h: 7em
+$nav-color: $theme-color
+$nav-color-link: #FFF
+
+/* IMAGE LIGHTBOX SELECTOR */
+
+#gallery-lightbox-container
+	cursor: pointer
+	position: fixed
+	z-index: 10000
+
+	-ms-touch-action: none
+	touch-action: none
+	img
+		width: 100%
+		height: auto
+		position: relative
+
+	//box-shadow: 0 0 3em rgba( 0, 0, 0, .5 )
+
+
+
+/* ACTIVITY INDICATION */
+#gallery-lightbox-loading
+	&::before
+		content: ''
+		
+/* OVERLAY */
+#gallery-lightbox-overlay
+	background-color: rgba( 255, 255, 255, .9 )
+	position: fixed
+	z-index: 9998
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+
+
+/* "CLOSE" BUTTON */
+#gallery-lightbox-close
+	width: 2.5em/* 40 */
+	height: 2.5em/* 40 */
+	text-align: left
+	//background-color: transparentize( $nav-color, .5 )
+	border-radius: 50%
+	position: fixed
+	z-index: 10002
+	top: .5em
+	right: .5em
+	transition: all .5s ease
+
+	&:hover,
+	&:focus
+		background-color: $nav-color
+		&::before
+			background-color: $nav-color-link
+			transform: rotate( -45deg )
+		&::after
+			background-color: $nav-color-link
+			transform: rotate( 45deg )
+
+	&::before,
+	&::after
+		width: 4px
+		background-color: $nav-color
+		content: ''
+		position: absolute
+		top: 20%
+		bottom: 20%
+		left: 50%
+		margin-left: -1px
+		transition: transform .3s ease
+		transform-origin: center
+	
+	&::before
+		transform: rotate( 45deg )
+	&::after
+		transform: rotate( -45deg )
+	
+
+/* NAVIGATION */
+
+#gallery-lightbox-nav
+	//background-color: rgba( 0, 0, 0, .5 )
+	//border-radius: 20px
+	position: absolute
+	display: flex
+	left: 50%
+	bottom: 3em
+	padding: 0.2em
+	opacity: 0
+	z-index: 1
+	//transition: all .5s ease
+	transform: translateX( -50% )
+	@include animation(gallery-nav, .2s, 0.5s, ease, forwards, In, -50%, 0)
+
+	& .nav-dot
+		width: 8px
+		height: 8px
+		background-color: transparent
+		border: 1px solid #fff
+		border-radius: 50%
+		display: inline-block
+		margin: auto 0.2em/* 5 */
+		padding: 0
+	
+		&.active
+			background-color: #fff
+	
+
+
+/* ARROWS */
+
+.gallery-lightbox-arrow
+	position: fixed
+	display: flex
+	width: $nav-control-w
+	height: $nav-control-h
+	top: 50%
+	justify-content: center
+	align-items: center
+	opacity: 0
+	background-color: transparentize( $nav-color, .5 )
+	@include animation(gallery-arrows, 0.2s, 0s, ease, forwards, In, 0, -50%)
+	z-index: 10001
+	
+	&:hover,
+	&:focus
+		background-color: transparentize( $nav-color, .0 )
+
+
+	&.prev
+		left: 0
+		transform: translate(-100%, -50%)
+
+	&.next
+		right: 0
+		transform: translate(100%, -50%)
+	
+	.icon
+		font-size: 2em
+		color: $nav-color-link 	
+
+
+/* CAPTION */
+
+#gallery-lightbox-caption
+	text-align: center
+	color: $nav-color-link 
+	background-color: transparentize( $nav-color, .5 )
+	position: fixed
+	z-index: 10001
+	left: 0
+	right: 0
+	bottom: 0
+	padding: 0.625em/* 10 */
+
+
+#gallery-lightbox-loading,
+#gallery-lightbox-overlay,
+#gallery-lightbox-close,
+#gallery-lightbox-caption
+	@include animation(gallery-fade, .2s, 0s, linear, forwards, In)
+
+
+//@media only screen and (max-width: 320px)
+
+
+

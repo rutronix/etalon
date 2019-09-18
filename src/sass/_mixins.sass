@@ -1,0 +1,134 @@
+// mixins
+@mixin font($f-name, $f-style, $f-weight, $f-url)
+	@font-face
+		font-family: $f-name
+		font-style: $f-style
+		font-weight: $f-weight
+		font-display: auto
+		src: url($f-url) format('woff2')
+
+//Убираем единицы измерения у чисел
+@function strip-units($size)
+	$number: $size / ($size * 0 + 1)
+	@return $number
+
+@function em($pixels, $fontsize: $base-font-size)
+	$fontsize: $fontsize + 0px
+	@return ($pixels/$fontsize)*1em
+
+@function px($em, $fontsize: $base-font-size)
+	@return round(strip-units($em) * strip-units($fontsize))*1px
+
+//Автоматическое центрирование
+@mixin push--auto 
+	margin:
+		left: auto
+		right: auto
+
+//модальное окно в полный экран
+@mixin modal
+	position: absolute
+	left: 0
+	right: 0
+	top: 0
+	bottom: 0
+
+// Вычисляем высоту блока за вычетом видимых в области экрана
+// например: height: calc-height($header-height, $nav-height, $top-bar-height)
+@function calc-height($h1, $h2:0, $h3:0)
+	$h: strip-units($h1) + strip-units($h2) + strip-units($h3)
+	@return calc(100vh - #{$h}px )
+	
+//Для псевдоэлементов ::before и ::after
+@mixin pseudo($display: block, $pos: absolute, $content:'')
+	content: $content
+	display: $display
+	position: $pos
+
+@mixin font-settings($font:false, $colour:false, $size:false, $case:false, $weight:false, $lh:false)
+	@if $font
+		font-family: $font + ', ' + $base-font-family
+	@else
+		font-family: $base-font-family
+	@if $size
+		font-size: $size 
+	@if $colour
+		color: $colour 
+	@if $case
+		text-transform: $case 
+	@if $weight
+		font-weight: $weight 
+	@if $lh
+		line-height: $lh 
+
+
+
+@mixin animation($name, $duration:0.2s, $delay:0, $animation:ease, $fill-mode:forwards, $fade:no-fade, $x:0, $y:0)
+	$shift-x: $x !global
+	$shift-y: $y !global
+	animation: animation-#{$name} if($delay != 0, $duration $delay, $duration) $animation
+	animation-fill-mode: $fill-mode
+	@content
+	
+	@keyframes animation-#{$name}
+		from
+			@if $fade != no-fade
+				opacity: if($fade == Out, 1, 0)
+			//transform: translate($shift-x, $shift-y)
+
+		to
+			transform: translate($shift-x, $shift-y)
+			@if $fade != no-fade
+				opacity: if($fade == Out, 0, 1)
+
+@mixin animation-delays($items, $start-delay:0ms, $between-delay:50ms)
+	@for $i from 0 through $items 
+		&:nth-child(#{$i + 1}) 
+			animation-delay: $start-delay+($between-delay*($i))
+
+
+@mixin transition-delays($items, $start-delay:0ms, $between-delay:50ms)
+	@for $i from 0 through $items 
+		&:nth-child(#{$i + 1}) 
+			transition-delay: $start-delay+($between-delay*($i))
+						
+// Миксин для создания масштабируемыхэлементов(обычно изображения/картинки заднего фона), 
+// чтобы поддерживать соотношение. Пример: @include responsive-ratio(16,9)
+@mixin responsive-ratio($x, $y, $pseudo:false)
+	$padding: unquote(( $y / $x )*100+'%')
+	@if $pseudo
+		&::before
+			@include pseudo($pos: relative)
+			width: 100%
+			padding-top: $padding
+	@else
+		padding-top: $padding
+
+//миксин создает треугольники. Задаются цвет, размер и направление
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false)
+	@include pseudo($pos: $position)
+	width: 0
+	height: 0
+	@if $round 
+		border-radius: 3px
+	@if $direction == down 
+		border-left: $size solid transparent
+		border-right: $size solid transparent
+		border-top: $size solid $color
+		margin-top: (0 - round( $size / 2.5 ))
+	@else if $direction == up 
+		border-left: $size solid transparent
+		border-right: $size solid transparent
+		border-bottom: $size solid $color
+		margin-bottom: 0 - round( $size / 2.5 )
+	@else if $direction == right 
+		border-top: $size solid transparent
+		border-bottom: $size solid transparent
+		border-left: $size solid $color
+		margin-right: -$size
+	@else if  $direction == left 
+		border-top: $size solid transparent
+		border-bottom: $size solid transparent
+		border-right: $size solid $color
+		margin-left: -$size
+

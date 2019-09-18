@@ -1,0 +1,36 @@
+/*  jCarousel Prev Next Buttons Styles  */
+
+.jcarousel-wrapper
+	.jcarousel-control
+		position: absolute
+		display: block
+		width: $nav-control-w
+		height: $nav-control-h
+		top: 50%
+		transform: translateY(- $nav-control-h / 2)
+		color: #FFF
+		font-size: $nav-control-w / 2
+		line-height: $nav-control-h 
+		text-align: center
+		background-color: transparentize($nav-color, 0.8)
+		border: 1px solid transparentize($nav-color, 0.2)
+		border-radius: $nav-control-w 
+		transition: background-color 300ms ease
+		display: none
+		//@include border-radius(50%)
+		//@include box-shadow(rgba(0,0,0,.8) 0 0 4px inset)
+		&:hover
+			background-color: transparentize($nav-color, 0.2)
+
+		&.inactive
+			cursor: default
+
+		&.prev
+			left: 15px
+
+		&.next
+			right: 15px
+
+	a:hover
+		color: #FFF 
+

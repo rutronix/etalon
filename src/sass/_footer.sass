@@ -1,0 +1,70 @@
+// Footer styles
+footer	
+	#footer-container
+		overflow: hidden
+		background: $footer-bg
+		font-size: 0.8em 
+		//color: #FFF
+		.footer-widgets
+
+			display: flex
+			//justify-content: space-around
+			padding: $gutter-20 / 2	 
+			
+			.footer-widget
+				//display: flex
+				width: 100%
+				margin:  0 0 auto
+				//justify-content: center
+				//align-items: start
+				&:nth-child(n)
+					text-align: center
+				&:first-child
+					text-align: left
+				&:last-child
+					text-align: right
+
+				table
+					margin: auto 
+
+		#copyright
+			//background: $body-bg
+			padding: $gutter-20 / 2
+			text-align: center
+			opacity: 0
+			transition: all 1500ms ease
+			//transform: translate(0, 100%)
+			&.visible
+				opacity: 1
+				//@include animation(copyright, 0.5s, 1s, ease-in-out, 0, 0)
+
+
+	.back-to-top
+		$btn-size: 30px
+		position: fixed
+		display: flex
+		align-items: center
+		justify-content: center
+		bottom: $btn-size * -1.2
+		right: $gutter-20
+		width: $btn-size
+		height: $btn-size
+		font-size: $btn-size / 2
+		background: transparentize($theme-color, 0.9)
+		color: darken($theme-color, 20%)
+		border: 1px solid darken($theme-color, 20%)
+		border-radius: $btn-size / 1.5
+		transition: all 700ms cubic-bezier(0.61, 0.67, 0.1, 1.01)
+		z-index: 9999
+		&:hover
+			color: lighten($theme-color, 100%)		
+			background: $theme-color
+			border-color: $theme-color
+		&.show
+			bottom: $btn-size * 1.5
+			
+#site-footer
+	z-index: 1
+	width: 100%
+	flex-shrink: 0
+// <!-- End Footer -->

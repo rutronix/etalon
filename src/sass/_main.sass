@@ -1,0 +1,150 @@
+// Main styles
+main
+	position: relative
+	width: 100% 
+	flex: auto
+	@include push--auto
+	clear: both
+	
+	&.bounded
+
+			
+	&.left-sidebar
+		#main-container
+			flex-direction: row-reverse 
+			
+	#main-header
+		position: relative
+		//min-height: 200px 
+		//padding: $gutter-20 0
+		//height: 100vh
+		height: calc-height($header-height, $nav-height, $top-bar-height)
+		overflow: hidden
+			
+		&-link
+			position: absolute
+			left: 50%
+			opacity: 0
+			transform: translate(-50%, -230px)
+			.button
+				color: #FFF 
+
+		&-excerpt
+			position: absolute
+			width: 50%
+			left: 50%
+			color: #FFF
+			padding: $gutter-20 $gutter-20 $gutter-20 * 4
+			background: transparentize($theme-color, 0.5)
+			transform: translate(-50%, 0)
+			
+		&.visible
+			#main-header-excerpt
+				@include animation(header-excerpt, 1.5s, 1s, ease-in-out, both, no-fade, -50%, -350px)
+
+			#main-header-link
+				@include animation(header-link, 2s, 2.5s, ease-in-out, both, no-fade, -50%, -230px)
+		div
+			transition-delay:  300ms
+
+		#scroll-up
+			position: absolute
+			width: 26px
+			height: 40px
+			bottom: 30px
+			left: 50%
+			transform: translateX(-50%)
+			color: #FFF 
+			background-color: transparentize($theme-color, 0.5)
+			border: 1px solid white
+			border-radius: 15px
+			.icon
+				margin-top: 2px
+				width: auto
+				@include animation(scroll-up, 0.5s, 3s infinite, ease, backwards, no-fade, 0, 5px)
+					//animation-iteration-count: infinite
+
+	#main-container
+		display: flex
+		//height: 100%
+		//min-height: 100vh
+		@include push--auto
+		padding: 
+			top: $gutter-20/2
+			bottom: $gutter-20/2
+		background-color: $main-bg
+		
+		.breadcrumbs
+			margin-bottom: $gutter-20 * 2
+			font-size: .8em   
+			
+		#content
+			float: left
+			width: 100%
+			//padding: 0 $gutter-20
+			background-color: $content-bg
+			box-sizing: border-box
+			
+			&.float-left
+				width: $content-width
+				margin-right: $gutter-20/2
+				
+			&.float-right
+				margin-left: $gutter-20/2
+
+			.page
+				opacity: 0
+				&.visible
+					@include animation(article, .8s, .5s, ease, both, In, 0, 0 )
+						transform: translate(0, 60%)
+
+		
+		#main-sidebar
+			width: 25%
+			float: left
+			padding: $gutter-20/2
+			background-color: $sidebar-bg 
+			border: 1px solid $border-color
+			box-sizing: border-box
+
+	&.nav-inline-logo
+		#main-header
+			height: calc-height($header-height, $top-bar-height)
+
+.projects
+	&-header
+		margin-bottom: $gutter-20
+		
+	&-categories
+		display: flex
+		width: 100%
+		justify-content: space-around
+		padding: $gutter-20
+		margin: 0
+		li
+			padding: $gutter-20/2
+			border: 1px solid  $theme-color
+			border-radius: 3px  
+		
+.project
+	.container
+		padding: 0
+
+nav
+	.post-navigation
+		padding: $gutter-20 0
+		.screen-reader-text
+			display: none
+		.nav-links
+			display: inline-block
+			width: 100%
+			.nav-previous
+				float: left
+			.nav-next
+				float: right
+			div
+				padding: 5px 0 
+				&:hover
+					transition:  200ms all linear
+					border-bottom: 3px solid $link-color-hover
+// <!-- End Main -->
